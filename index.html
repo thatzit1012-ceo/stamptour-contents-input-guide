@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>스탬프투어 콘텐츠 입력 가이드</title>
+<style>
+  @font-face{font-family:'Pretendard';font-weight:400;src:url('assets/fonts/Pretendard-Regular.ttf') format('truetype');font-display:swap}
+  @font-face{font-family:'Pretendard';font-weight:600;src:url('assets/fonts/Pretendard-SemiBold.ttf') format('truetype');font-display:swap}
+  @font-face{font-family:'Pretendard';font-weight:700;src:url('assets/fonts/Pretendard-Bold.ttf') format('truetype');font-display:swap}
+  @font-face{font-family:'Pretendard';font-weight:800;src:url('assets/fonts/Pretendard-Bold.ttf') format('truetype');font-display:swap}
+  :root{
+    --pri:#7b3fe4;--pri2:#7b3fe4;--prid:#6a2fd0;--ink:#262433;--muted:#6b7488;
+    --bg:#f5f3fb;--line:#ebe6f5;--soft:#f3eeff;
+    --req:#7b3fe4;--opt:#9099ab;
+    --note-bg:#fff8e8;--note-bd:#f0cd6e;--warn-bg:#fdecee;--warn-bd:#e89aa3;
+    --grad:linear-gradient(135deg,#7b3fe4 0%,#9a5ce6 100%);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--ink);line-height:1.62;
+    font-family:'Pretendard','Malgun Gothic','맑은 고딕',-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 18px}
+  /* nav */
+  .nav{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line)}
+  .nav .in{max-width:1000px;margin:0 auto;padding:13px 18px;display:flex;justify-content:space-between;align-items:center}
+  .nav .logo{font-weight:800;font-size:15px;color:var(--ink)}
+  .nav .logo b{color:var(--pri)}
+  .nav .links{display:flex;gap:6px;flex-wrap:wrap}
+  .nav .links a{font-size:13.5px;color:var(--muted);font-weight:600;padding:6px 11px;border-radius:7px}
+  .nav .links a:hover{background:var(--soft);color:var(--pri)}
+  /* hero */
+  .hero{background:var(--grad);border-radius:20px;padding:42px 44px;margin:26px 0;color:#fff;
+    box-shadow:0 14px 34px rgba(90,80,210,.28)}
+  .hero .pill{display:inline-block;background:rgba(255,255,255,.22);color:#fff;font-weight:700;
+    font-size:13px;padding:5px 14px;border-radius:20px;margin-bottom:16px}
+  .hero h1{font-size:40px;font-weight:800;line-height:1.18;letter-spacing:-.01em}
+  .hero p{font-size:16px;margin-top:14px;color:#f0eeff;max-width:680px;line-height:1.6}
+  .hero .btns{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:15px;padding:12px 22px;
+    border-radius:10px;cursor:pointer}
+  .btn.solid{background:#fff;color:var(--prid)}
+  .btn.solid:hover{background:#f3f2ff}
+  .btn.ghost{background:rgba(255,255,255,.14);color:#fff;border:1.5px solid rgba(255,255,255,.55)}
+  /* section */
+  section{background:#fff;border-radius:18px;padding:32px 38px;margin-bottom:22px;
+    box-shadow:0 6px 22px rgba(40,40,90,.06)}
+  .sh{display:flex;align-items:center;gap:13px;margin-bottom:8px}
+  .sh .num{width:34px;height:34px;border-radius:50%;background:var(--grad);color:#fff;font-weight:800;
+    display:flex;align-items:center;justify-content:center;font-size:16px;flex:none}
+  .sh h2{font-size:22px;font-weight:800;color:var(--ink)}
+  .sdesc{font-size:15px;color:var(--muted);margin:4px 0 18px}
+  .sub{font-size:16px;font-weight:800;color:var(--ink);margin:22px 0 10px}
+  /* steps */
+  .steps{display:flex;align-items:stretch;gap:8px;margin:6px 0 4px;flex-wrap:wrap}
+  .stp{flex:1;min-width:150px;background:var(--soft);border-radius:13px;padding:18px 14px;text-align:center;position:relative}
+  .stp .c{width:30px;height:30px;border-radius:50%;background:var(--grad);color:#fff;font-weight:800;font-size:14px;
+    display:flex;align-items:center;justify-content:center;margin:0 auto 8px}
+  .stp .t{font-weight:800;font-size:15px;color:var(--ink)}
+  .stp .d{font-size:12.5px;color:var(--muted);margin-top:3px}
+  /* table */
+  table{width:100%;border-collapse:collapse;font-size:14.5px}
+  th,td{border:1px solid var(--line);padding:11px 13px;text-align:left;vertical-align:top}
+  th{background:var(--soft);color:var(--ink);font-weight:800}
+  .badge{display:inline-block;font-size:11.5px;font-weight:800;padding:2px 9px;border-radius:20px;margin-left:7px;vertical-align:middle}
+  .b-req{background:#e7ecff;color:var(--req)} .b-opt{background:#eef0f4;color:var(--opt)}
+  .ex{display:block;color:var(--pri2);font-size:13px;margin-top:5px;font-style:italic}
+  .grp td{background:#f3eeff;color:var(--pri2);font-weight:800}
+  code{background:var(--soft);color:var(--prid);padding:1px 7px;border-radius:5px;font-size:13px;font-weight:700;
+    font-family:'Pretendard',monospace}
+  /* note / warn */
+  .note,.warn{border-radius:12px;padding:16px 18px;margin-top:16px;font-size:14px;line-height:1.7}
+  .note{background:var(--note-bg);border:1px solid var(--note-bd)}
+  .warn{background:var(--warn-bg);border:1px solid var(--warn-bd);color:#a23b46}
+  .note b,.warn b{font-weight:800}
+  .note .nt{font-weight:800;color:#9a7b1e;margin-bottom:6px;display:block}
+  ul.k{list-style:none;display:flex;flex-direction:column;gap:8px;margin-top:4px}
+  ul.k li{position:relative;padding-left:18px}
+  ul.k li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--pri2)}
+  .hl{background:linear-gradient(transparent 55%,#ece4ff 55%);font-weight:700}
+  .pk{background:linear-gradient(transparent 55%,#efe6ff 55%);font-weight:700;color:#6b4fcf}
+  /* course cards */
+  .courses{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px}
+  .cc{border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .cc .ch{background:var(--grad);color:#fff;font-weight:800;font-size:14px;padding:9px 14px}
+  .cc .cb{padding:12px 14px;display:flex;flex-wrap:wrap;gap:6px}
+  .tag{background:var(--soft);color:var(--prid);font-size:12.5px;font-weight:700;padding:4px 11px;border-radius:20px}
+  /* image mocks */
+  .mocks{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:6px 0 4px}
+  .mock{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:#fff}
+  .mock .ph{height:150px;background:linear-gradient(135deg,#e9ecff,#efe7fb);display:flex;align-items:center;
+    justify-content:center;color:var(--pri2);font-weight:800;font-size:30px}
+  .mock .cap{padding:10px 12px;font-size:13px;color:var(--muted);text-align:center}
+  .mock .cap b{color:var(--ink);display:block;font-size:14px}
+  /* code block */
+  .code{background:#1e2333;color:#cdd3e6;border-radius:12px;padding:18px 20px;font-size:13.5px;line-height:1.9;
+    font-family:'Pretendard',monospace;margin-top:6px;white-space:pre}
+  .code .f{color:#ffd479} .code .x{color:#7fd1b9} .code .c{color:#7a85a8}
+  .foot{text-align:center;color:#9aa2b6;font-size:13px;padding:18px 0 56px;line-height:1.9}
+  .foot b{color:var(--ink)}
+  /* faq */
+  details.faq{border:1px solid var(--line);border-radius:12px;padding:0;margin-top:10px;overflow:hidden}
+  details.faq summary{list-style:none;cursor:pointer;font-weight:700;font-size:15.5px;color:var(--ink);
+    padding:15px 48px 15px 18px;position:relative;background:#fff}
+  details.faq summary::-webkit-details-marker{display:none}
+  details.faq summary::before{content:"Q";position:absolute;left:18px;display:none}
+  details.faq summary::after{content:"+";position:absolute;right:18px;top:12px;font-size:22px;color:var(--pri);font-weight:400}
+  details.faq[open] summary::after{content:"–"}
+  details.faq[open] summary{background:var(--soft)}
+  details.faq>div{padding:14px 18px 18px;font-size:14.5px;color:#3a3550;line-height:1.7;border-top:1px solid var(--line)}
+
+  @page{size:A4 portrait;margin:11mm 9mm}
+  @media print{
+    body{background:#fff}
+    .nav{position:static}
+    .hero{box-shadow:none;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    section,.note,.warn,.cc,.mock,.code,tr{page-break-inside:avoid;break-inside:avoid}
+    section{box-shadow:none;border:1px solid var(--line)}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  }
+</style>
+</head>
+<body>
+  <div class="nav"><div class="in">
+    <div class="logo"><b>STAMPTOUR</b> 콘텐츠 가이드</div>
+    <div class="links">
+      <a href="#flow">진행순서</a><a href="#form">입력폼</a><a href="#course">코스</a>
+      <a href="#image">이미지</a><a href="#zip">업로드</a><a href="#faq">FAQ</a>
+    </div>
+  </div></div>
+
+  <div class="wrap">
+    <!-- HERO -->
+    <div class="hero">
+      <span class="pill">스탬프투어 · 콘텐츠 가이드</span>
+      <h1>스탬프 콘텐츠<br>입력 가이드</h1>
+      <p>엑셀 입력폼에 스탬프존(장소·소개·좌표) 정보를 적고, 이미지와 함께 묶어 한 번에 등록하는 방법을
+        처음부터 끝까지 안내합니다. 스탬프투어는 위치기반(GPS) 인증이라 <b>위도·경도·반경이 필수</b>입니다.</p>
+      <div class="btns">
+        <a class="btn solid" href="assets/sample-form.xlsx" download="스탬프투어_콘텐츠_입력폼_샘플.xlsx">📥 샘플폼 · 인천</a>
+        <a class="btn ghost" href="assets/sample-form-markets.xlsx" download="스탬프투어_콘텐츠_입력폼_샘플_전국시장.xlsx">📥 예시폼 · 전국 시장(코스 포함)</a>
+        <a class="btn ghost" href="#form">작성 방법 보기</a>
+      </div>
+      <p style="font-size:13px;color:#e6e1ff;margin-top:12px">
+        ※ 두 가지 샘플을 제공합니다 — <b>인천</b>(기본 · 코스 없음) / <b>전국 시장</b>(코스를 시장별로 묶은 예시).</p>
+    </div>
+
+    <!-- 진행순서 -->
+    <section id="flow">
+      <div class="sh"><div class="num">✓</div><h2>진행 순서</h2></div>
+      <p class="sdesc">전체 과정은 네 단계입니다. 입력폼을 작성하고, 이미지를 준비해, 하나의 ZIP으로 묶어 일괄 등록합니다.</p>
+      <div class="steps">
+        <div class="stp"><div class="c">1</div><div class="t">입력폼 작성</div><div class="d">장소·소개·좌표·반경 입력</div></div>
+        <div class="stp"><div class="c">2</div><div class="t">이미지 준비</div><div class="d">번호.png · images 폴더</div></div>
+        <div class="stp"><div class="c">3</div><div class="t">ZIP 묶기</div><div class="d">엑셀 + images</div></div>
+        <div class="stp"><div class="c">4</div><div class="t">일괄 업로드</div><div class="d">관리자에서 ZIP 등록</div></div>
+      </div>
+      <div class="note"><span class="nt">💡 참고</span>
+        이미지가 없어도 등록 가능합니다. 사진이 없는 스탬프존은 ‘이미지 준비중’ 기본 이미지가 자동으로 들어갑니다.
+        등록은 관리자 <b>[스탬프 › 스탬프 일괄등록]</b>에서 진행합니다.</div>
+    </section>
+
+    <!-- 입력폼 -->
+    <section id="form">
+      <div class="sh"><div class="num">1</div><h2>입력폼(엑셀) 작성</h2></div>
+      <p class="sdesc">샘플 입력폼을 내려받아, 위의 형식 그대로 고쳐 쓰면 됩니다.
+        1행(항목 이름)은 그대로 두고 <b>2행(예시)부터</b> 스탬프존을 한 줄씩 입력합니다.
+        입력한 줄 순서가 곧 앱 노출 순서입니다.</p>
+      <table>
+        <tr><th style="width:150px">항목</th><th>설명</th></tr>
+        <tr><td><b>번호</b><span class="badge b-req">필수</span></td>
+          <td>1부터 차례대로 매기는 번호. 화면 노출 순서이자 이미지 파일명과 연결됩니다.
+            <span class="ex">예) 1, 2, 3, 4 …</span></td></tr>
+        <tr><td><b>장소</b><span class="badge b-req">필수</span></td>
+          <td>앱에 표시되는 장소 이름. 다국어가 필요하면 한글명(영문명) 형식으로 적습니다.
+            <span class="ex">예) 인천시립박물관 · 센트럴파크(centralpark)</span></td></tr>
+        <tr><td><b>한줄소개</b><span class="badge b-opt">선택</span></td>
+          <td>목록·상단에 보이는 짧은 소개 또는 분류 라벨.
+            <span class="ex">예) 박물관 · 문화재 · 공원</span></td></tr>
+        <tr><td><b>장소 소개</b><span class="badge b-req">필수</span></td>
+          <td>상세 페이지 본문 설명. 외부 링크(URL)를 넣으면 클릭 시 해당 페이지(웹·유튜브·인스타 등)로 이동합니다.
+            <span class="ex">예) 1946년 개관한 우리나라 최초의 공립박물관… / https://example.com</span></td></tr>
+        <tr class="grp"><td colspan="2">스탬프존 — 위치기반(GPS) 인증 기준 · 세 항목 모두 <b style="color:var(--req)">필수</b></td></tr>
+        <tr><td><b>위도</b><span class="badge b-req">필수</span></td>
+          <td>지도 표시 + GPS 인증 기준 좌표(Latitude). 소수점 6자리 이상 권장.
+            <span class="ex">예) 37.420809</span></td></tr>
+        <tr><td><b>경도</b><span class="badge b-req">필수</span></td>
+          <td>지도 표시 + GPS 인증 기준 좌표(Longitude). 소수점 6자리 이상 권장.
+            <span class="ex">예) 126.653244</span></td></tr>
+        <tr><td><b>반경</b><span class="badge b-req">필수</span></td>
+          <td>좌표를 중심으로 한 스탬프 인증 반경(미터). 이 원 안에 들어오면 스탬프를 획득합니다.
+            넓은 장소는 크게, 작은 지점은 작게 설정합니다.
+            <span class="ex">예) 공원·해변 100 / 일반 건물 50 / 작은 정자·묘역 20</span></td></tr>
+        <tr><td><b>코스</b><span class="badge b-opt">선택</span></td>
+          <td>스탬프존을 여러 묶음(코스)으로 나누는 경우에만 입력합니다. 자세한 사용법은 아래 <b>코스 기능</b>을 참고하세요.
+            <span class="ex">예) 1코스 · 남대문시장(namdaemunmarket)</span></td></tr>
+      </table>
+
+      <div class="sub">실제 입력 예시</div>
+      <table style="font-size:13.5px">
+        <tr><th>번호</th><th>장소</th><th>한줄소개</th><th>장소 소개</th><th>위도</th><th>경도</th><th>반경</th><th>코스</th></tr>
+        <tr><td>1</td><td>인천시립박물관</td><td>박물관</td><td>1946년 개관한 우리나라 최초의 공립박물관…</td><td>37.420809</td><td>126.653244</td><td>100</td><td></td></tr>
+        <tr><td>2</td><td>센트럴파크(centralpark)</td><td>공원</td><td>송도 고층빌딩 숲 사이의 국내 최초 해수공원…</td><td>37.394500</td><td>126.642000</td><td>100</td><td></td></tr>
+      </table>
+
+      <div class="note"><span class="nt">⚠️ 작성 시 유의할 점</span>
+        <ul class="k">
+          <li><b>장소 · 장소 소개 · 위도 · 경도 · 반경</b>은 반드시 채워야 합니다(비면 등록되지 않음).</li>
+          <li>번호는 1부터 빠짐없이 이어지게 하고, <b>이미지 파일명(1.png, 1_2.png …)과 일치</b>시킵니다.</li>
+          <li>위도·경도는 소수점 6자리 이상, 반경은 미터(숫자)로 입력합니다.</li>
+          <li>장소명이 빈 줄은 자동으로 건너뜁니다. 스탬프존 추가는 줄(행)을 추가해 입력합니다.</li>
+          <li>1행(항목 이름)은 지우거나 바꾸지 마세요.</li>
+        </ul></div>
+
+      <div class="note" style="background:#f3eeff;border-color:#d9c9f5">
+        🔗 <b>관리자 입력 항목과 1:1 일치</b> — 번호→<b>노출 순서</b>, 장소→<b>장소명(다국어)</b>, 한줄소개→<b>부제</b>,
+        장소 소개→<b>소개</b>, 위도·경도·반경→<b>스탬프존</b>, 코스→<b>코스</b>.
+        관리자 <b>[스탬프 › 스탬프 일괄등록]</b>이 헤더명을 자동 인식해 그대로 등록합니다.
+      </div>
+    </section>
+
+    <!-- 코스 -->
+    <section id="course">
+      <div class="sh"><div class="num">2</div><h2>코스(course) 기능</h2></div>
+      <p class="sdesc">하나의 투어 안에서 스탬프존을 <b>여러 묶음(코스)으로 나눠</b> 보여주는 기능입니다.
+        여러 구역·테마·시장을 한 투어에서 운영할 때 유용합니다. <b>코스가 없으면 코스 칸을 전부 비워 두세요.</b></p>
+      <div class="sub">묶음 예시 — ‘시장별 맛집’ 투어</div>
+      <div class="courses">
+        <div class="cc"><div class="ch">1코스 · 남대문시장</div><div class="cb">
+          <span class="tag">효자왕만두</span><span class="tag">남대문숯불갈비</span><span class="tag">대도식당</span></div></div>
+        <div class="cc"><div class="ch">2코스 · 동대문시장</div><div class="cb">
+          <span class="tag">닭한마리골목</span><span class="tag">엄마손칼국수</span></div></div>
+        <div class="cc"><div class="ch">3코스 · 서문시장</div><div class="cb">
+          <span class="tag">서문칼제비</span><span class="tag">납작만두</span></div></div>
+        <div class="cc"><div class="ch">4코스 · 경동시장</div><div class="cb">
+          <span class="tag">경동빈대떡</span><span class="tag">제기동순대국</span></div></div>
+      </div>
+      <div class="note"><span class="nt">코스 작성 규칙</span>
+        <ul class="k">
+          <li>코스를 쓰는 경우, <b>같은 코스는 코스명을 완전히 똑같이</b> 입력합니다(띄어쓰기·괄호·영문 포함).</li>
+          <li>한 셀을 복사해 같은 코스의 다른 줄에 붙여넣으면 통일하기 쉽습니다.</li>
+          <li>코스를 쓰지 않는 투어는 코스 칸을 전부 비워 둡니다.</li>
+        </ul></div>
+      <div class="warn">⚠️ 한 글자만 달라도 다른 코스로 인식됩니다.
+        예) <code>1코스</code> ≠ <code>1 코스</code> (띄어쓰기) — 같은 묶음은 완전히 동일하게 입력하세요.</div>
+    </section>
+
+    <!-- 이미지 -->
+    <section id="image">
+      <div class="sh"><div class="num">3</div><h2>이미지 준비</h2></div>
+      <p class="sdesc">이미지는 입력폼과 함께 ZIP의 <code>images</code> 폴더에 넣습니다.
+        스탬프투어는 한 장소에 <b>여러 장(대표 + 추가)</b>을 넣을 수 있는 점이 다릅니다.</p>
+      <div class="sub">이 사진이 들어가는 곳</div>
+      <div class="mocks">
+        <div class="mock"><div class="ph">🗺️</div><div class="cap"><b>스탬프 지도</b>지도 위 마커·미리보기</div></div>
+        <div class="mock"><div class="ph">📋</div><div class="cap"><b>스탬프 목록</b>목록 카드 썸네일</div></div>
+        <div class="mock"><div class="ph">🏛️</div><div class="cap"><b>스탬프 상세</b>대표 + 추가 사진(슬라이드)</div></div>
+      </div>
+
+      <div class="sub">권장 크기</div>
+      <p style="font-size:14.5px;color:var(--muted)">스탬프 상세의 사진은 <b>375 × 281</b> 비율(가로가 살짝 긴 직사각형)을 권장합니다.
+        화면에서 잘려 보이지 않도록 이 비율에 맞춰 준비하면 가장 깔끔합니다.</p>
+
+      <div class="sub">파일명 규칙</div>
+      <p style="font-size:14.5px;color:var(--muted);margin-bottom:8px">이미지 파일은 <b>번호 기준</b>으로 저장하고, 엑셀의 번호 칸과 일치시킵니다.</p>
+      <table style="max-width:620px">
+        <tr><th>파일명</th><th>역할</th></tr>
+        <tr><td><code>1.png</code></td><td>1번 장소의 <b>대표 이미지</b>(맨 처음 노출)</td></tr>
+        <tr><td><code>1_2.png</code> · <code>1_3.png</code></td><td>1번 장소의 <b>추가 이미지</b>(상세에서 순서대로 표시)</td></tr>
+        <tr><td><code>2.png</code></td><td>2번 장소의 대표 이미지</td></tr>
+        <tr><td><span style="color:var(--muted)">(파일 없음)</span></td><td>‘이미지 준비중’ 기본 이미지 자동 적용</td></tr>
+      </table>
+
+      <div class="note"><span class="nt">지원 형식 · 그 외 안내</span>
+        <ul class="k">
+          <li>지원 형식: <code>png</code> · <code>jpg</code> · <code>jpeg</code> · <code>gif</code> · <code>webp</code></li>
+          <li>한 장소에 사진이 여러 장이면 <b>번호.png(대표)</b> + <b>번호_2, _3 …(추가)</b> 로 넣습니다.</li>
+          <li>사진이 너무 무거우면(예: 1,000px 내외) 업로드·표시가 빠르고 균형이 좋습니다.</li>
+          <li>홈 목록 썸네일·메인 배너 이미지는 입력폼과 별도로 관리자에서 설정합니다.</li>
+        </ul></div>
+    </section>
+
+    <!-- ZIP -->
+    <section id="zip">
+      <div class="sh"><div class="num">4</div><h2>ZIP으로 묶어 업로드</h2></div>
+      <p class="sdesc">엑셀 입력폼과 images 폴더를 하나의 ZIP으로 묶어 관리자에서 업로드합니다.</p>
+      <div class="sub">ZIP 구조</div>
+      <div class="code"><span class="f">📦 stamptour.zip</span>
+ ├─ <span class="x">스탬프투어_콘텐츠_입력폼.xlsx</span>   <span class="c"># 엑셀 입력폼</span>
+ └─ <span class="f">📁 images/</span>                  <span class="c"># 장소 이미지 폴더</span>
+     ├─ 1.png        <span class="c"># 1번 대표</span>
+     ├─ 1_2.png      <span class="c"># 1번 추가</span>
+     ├─ 2.png
+     └─ 3.png …</div>
+
+      <div class="sub">ZIP 만드는 방법</div>
+      <ul class="k" style="font-size:14.5px">
+        <li><b>Windows</b> — 엑셀 파일과 <code>images</code> 폴더를 함께 선택 → 우클릭 → ‘압축(ZIP 폴더로)’.</li>
+        <li><b>Mac</b> — 두 항목 선택 → 우클릭 → ‘2개 항목 압축’.</li>
+        <li>관리자 <b>[스탬프 › 스탬프 일괄등록]</b> → <b>대상 앱(스탬프투어)</b> 선택 → ZIP 업로드 → 한 번에 등록.</li>
+      </ul>
+      <div class="note" style="background:#f3eeff;border-color:#d9c9f5">
+        💡 헤더명(번호·장소·…·코스)을 자동 인식하므로 <b>고객 입력폼과 관리자 등록 항목이 그대로 일치</b>합니다.
+        등록 후 앱(또는 미리보기)에서 지도 위 <b>스탬프존 위치·반경</b>과 <b>코스 구분</b>이 의도대로 보이는지 확인하세요.
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <div class="sh"><div class="num">?</div><h2>자주 묻는 질문 (FAQ)</h2></div>
+      <p class="sdesc">콘텐츠 입력·업로드 과정에서 자주 나오는 질문을 모았습니다.</p>
+
+      <details class="faq" open>
+        <summary>이미지가 없어도 등록되나요?</summary>
+        <div>네. 사진이 없는 스탬프존은 ‘이미지 준비중’ 기본 이미지가 자동으로 들어갑니다. 나중에 관리자에서 사진만 추가해도 됩니다.</div>
+      </details>
+      <details class="faq" open>
+        <summary>위도·경도는 어디서 확인하나요?</summary>
+        <div>지도(카카오맵·네이버지도·구글지도)에서 해당 지점을 길게 누르거나 우클릭하면 좌표가 나옵니다. <b>소수점 6자리 이상</b>으로 입력할수록 위치가 정확합니다.</div>
+      </details>
+      <details class="faq" open>
+        <summary>반경은 얼마로 설정하나요?</summary>
+        <div>장소 크기에 맞춰 정합니다. 예) 공원·해변 <code>100</code>m / 일반 건물 <code>50</code>m / 작은 정자·묘역 <code>20</code>m. 너무 작으면 현장에서도 인증이 어렵고, 너무 크면 멀리서도 인증돼 부정 참여가 생길 수 있습니다.</div>
+      </details>
+      <details class="faq" open>
+        <summary>코스는 꼭 입력해야 하나요?</summary>
+        <div>아니요, <b>선택</b>입니다. 스탬프존을 여러 묶음으로 나눌 때만 코스명을 적고, 나누지 않으면 코스 칸을 전부 비워 두세요. 같은 코스는 코스명을 <b>완전히 똑같이</b> 입력해야 같은 묶음으로 인식됩니다.</div>
+      </details>
+      <details class="faq" open>
+        <summary>한 장소에 사진을 여러 장 넣을 수 있나요?</summary>
+        <div>네. <code>번호.png</code>가 대표 이미지, <code>번호_2.png</code>·<code>번호_3.png</code>가 추가 이미지입니다. 상세 페이지에서 순서대로 표시됩니다.</div>
+      </details>
+      <details class="faq" open>
+        <summary>유튜브·인스타 같은 외부 링크를 넣으려면?</summary>
+        <div><b>장소 소개</b> 칸에 전체 주소(<code>https://…</code>)를 넣으면 됩니다. 사용자가 누르면 해당 페이지로 이동합니다.</div>
+      </details>
+      <details class="faq" open>
+        <summary>업로드했는데 일부만 등록되거나 실패했어요.</summary>
+        <div>필수값(장소·장소 소개·위도·경도·반경)이 빠진 줄이 있으면 <b>안전을 위해 전체가 취소</b>되고, 어느 행이 문제인지 메시지로 알려줍니다. 해당 행을 고쳐 다시 업로드하면 됩니다.</div>
+      </details>
+      <details class="faq" open>
+        <summary>엑셀의 항목 이름(헤더)을 바꿔도 되나요?</summary>
+        <div>1행의 항목 이름은 그대로 두세요. 관리자가 <b>헤더명을 자동 인식</b>해 등록하므로, 이름을 바꾸면 인식되지 않을 수 있습니다. 열 순서가 바뀌는 것은 괜찮습니다.</div>
+      </details>
+      <details class="faq" open>
+        <summary>파일 형식과 업로드 방법은?</summary>
+        <div>엑셀(<code>.xlsx</code>)과 이미지(png·jpg·jpeg·gif·webp)를 한 폴더에 담아 <b>ZIP</b>으로 압축한 뒤, 관리자 <b>[스탬프 › 스탬프 일괄등록]</b>에서 대상 앱을 고르고 업로드합니다.</div>
+      </details>
+    </section>
+
+    <div class="foot">
+      <b>댓츠잇소프트 주식회사</b><br>
+      📞 1551-0901 · ✉ thatzit1012@gmail.com · 🌐 stamptour.app
+    </div>
+  </div>
+</body>
+</html>
